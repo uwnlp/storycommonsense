@@ -1,2 +1,3 @@
-# storycommonsense
-Modeling Naive Psychology of Characters in Simple Commonsense Stories
+# CSE Espresso Room
+Website for the CSE espresso room.
+Uses include letting people know who's managing it, how much funds need to be raised, etc.
