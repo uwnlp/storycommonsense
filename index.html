@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 
-<?php
-  header("Access-Control-Allow-Origin: *"); 
-  header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-
-?>
-
 
 <head>
   <title>Story Commonsense</title>
 
-  <script type="text/javascript" src="js/clientside.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+  <script type="text/javascript" src="js/dataviz.js"></script>
+
+  <!-- For story dropdown -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css">
+
 </head>
 <body>
   <div class="container content-left">
-    <div class="row" style="margin-top: 0px;">
-      <div class="col-sm-10">
-        <img src="http://pngimg.com/uploads/book/book_PNG2115.png?i=1" style="width: 30%;"><img src="http://www.clker.com/cliparts/f/6/H/P/E/K/man-thinking.svg" style="width: 25%;">
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-12">
+        <!--img src="http://pngimg.com/uploads/book/book_PNG2115.png?i=1" style="width: 30%;"><img src="http://www.clker.com/cliparts/f/6/H/P/E/K/man-thinking.svg" style="width: 25%;"-->
         <h1 style="">Modeling Naive Psychology of Characters in Simple Commonsense Stories</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-xs-12">
+        
         <p><em>Quick links:</em>&nbsp;
           <a href="data/storycommonsense_data.zip">[download the data]</a>
           &nbsp;
           <a href="" data-target="#contactUs" data-toggle="collapse" onclick="return false;">[contact us]</a>
           &nbsp;
-          <a href="https://homes.cs.washington.edu/~msap/pdfs/rashkin2018modeling.pdf">[paper]</a>
+          <a href="https://homes.cs.washington.edu/~msap/pdfs/rashkin2018modeling.pdf" target="_blank">[paper]</a>
         </p>
         <div id="contactUs" class="collapse">
           <p>
@@ -38,34 +44,95 @@
           </p>
           <hr>
         </div>
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-xs-12">
+            <h4>Abstract</h4>
+            <p style="font-size: 10pt; width: 100%;display: inline-block;text-align: justify;">
+              Understanding a narrative requires reading between the lines and reasoning about the unspoken but obvious implications about events and people’s mental states &mdash; a capability that is trivial for humans but remarkably hard for machines.
+              To facilitate research addressing this challenge, we introduce a new annotation framework to explain naive psychology of story characters as fully-specified chains of mental states with respect to <em>motivations</em> and <em>emotional</em> reactions.
+              Our work presents a new large-scale dataset with rich low-level annotations and establishes baseline performance on several new tasks, suggesting avenues for future research. 
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-12">
+        <img src="graphics/SCS_text.png" style="width: 90%;">
+        <h4 class="text-muted"><small>Enabling reasoning about the mental states of characters in a story.</small></h4> 
       </div>
     </div>
+    <hr>
     <div class="row">
-      <div class="col-sm-9 col-md-7">
-        <div class="row"><div class="col-sm-12">
-          <p>
-            Enabling reasoning about the mental states of characters in a story.
-          </p>
-          <h4>
-            <!--small><a href="" data-target="#who" data-toggle="collapse" onclick="return false";>[expand]</a></small-->
-          </h4>
-          <div class="" id="who">
-            <div class="alert alert-secondary" role="alert">This website is still under construction, check back soon...</div>
+      <div class="col-8">
+        <div class="row">
+          <div class="col-8">
+            <!--h4 class="text-muted"><small>
+              Enabling reasoning about the mental states of characters in a story.</small>
+            </h4>
+            <h4>Abstract</h4>
+            <p style="font-size: 10pt; max-width: 500px;display: inline-block;text-align: justify;">
+              Understanding a narrative requires reading between the lines and reasoning about the unspoken but obvious implications about events and people’s mental states &mdash; a capability that is trivial for humans but remarkably hard for machines.
+              To facilitate research addressing this challenge, we introduce a new annotation framework to explain naive psychology of story characters as fully-specified chains of mental states with respect to <em>motivations</em> and <em>emotional</em> reactions.
+              Our work presents a new large-scale dataset with rich low-level annotations and establishes baseline performance on several new tasks, suggesting avenues for future research. 
+            </p-->
           </div>
-        </div></div>        
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-secondary" role="alert">This website is still under construction, check back soon...</div>
+            <h4>Browsing tool</h4>
+            <p>
+              Select one of our stories to see all the annotations
+            </p>
+
+            <select id="storySelecter" onchange="loadStory(this.value)" class="selectpicker" data-live-search="true" style="width:70%;">
+              <option selected disabled value> -- select a story -- </option>
+              <!--option class="train" value="013e6510-5cd4-4b4e-bd7e-491d3732602b" data-tokens="013e6510-5cd4-4b4e-bd7e-491d3732602b">School Project</option>
+              <option class="dev" value="a2ddbb50-e45b-4ad3-becf-b2d8475172bf" data-tokens="a2ddbb50-e45b-4ad3-becf-b2d8475172bf">Curry Disaster</option-->
+            </select>
+
+            <div id="storyViz" style="display: none;">
+              <h4 id="title"></h4>
+              <div id="line1"></div>
+              <div id="line2"></div>
+              <div id="line3"></div>
+              <div id="line4"></div>
+              <div id="line5"></div>
+            </div>
+            <!--div id="storyVizKey" style="margin-top: 10px;display: none;">
+              <h5>Key</h5>
+              <span class="badge badge-pill badge-primary">char</span> appears in line.<br>
+              <span class="badge badge-pill badge-secondary">char</span> doesn't appears in line.
+            </div-->
+          </div>
+        </div>
       </div>
-      <div class="col-sm-3 col-md-3" style="margin-top: 20px;">
-        
-        <!--figure>
+
+      <div class="col-4" style="margin-top: 20px;">
+        <figure>
           <div class="img-div">
-            <img class="figure-img img-fluid rounded" src="http://prima-coffee.com/sites/default/files/learn/espresso/espresso-milk-preview.jpg" alt="Team members standing on the UW campus" style="width: 100%;max-width:none;">
-            <img class="hoverlarge" src="http://prima-coffee.com/sites/default/files/learn/espresso/espresso-milk-preview.jpg" alt="Team members standing on the UW campus" style="left:-120px;top:-75px; border-radius: 0%;">
+            <img class="figure-img img-fluid rounded" src="graphics/MaslowReissPlutchik.png">
+            <img class="hoverlarge" src="graphics/MaslowReissPlutchik.png"style="left: -230px; top: 0px; border-radius: 0%; width:600px;">
             <figcaption class="figure-caption">
-              Latte art
+              Theories of Motivation (Maslow and Reiss) and Emotional Reaction (Plutchik).
             </figcaption>
           </div>
         </figure>
-        <figure>
+        <div id="storyVizKey" style="margin-top: 10px;display: none;">
+        <hr>
+          <h5>Story Annotation Key</h5>
+          <span class="badge badge-pill badge-primary"><em>char</em></span> appears in line.<br>
+          <span class="badge badge-pill badge-secondary"><em>char</em></span> doesn't appears in line.
+        </div>
+        <!--figure>
+          <div class="img-div">
+            <img class="figure-img img-fluid rounded" src="graphics/SCS_annotatedstory.png">
+            <figcaption class="figure-caption">
+              A story example with partial annotations for motivations (dashed) and emotional reactions (solid).
+              Open text explanations are in black (e.g., "<span style="color: black;">frustrated</span>") and formal theory labels are in blue with brackets (e.g., "<span style="color: blue;">[esteem]</span>").
+            </figcaption>
+          </div>
+        </figure-->
+        <!--figure>
           <div class="img-div">
             <img class="figure-img img-fluid rounded" src="http://cafebritt.com/public/img/expierience/recipes-espresso.jpg" alt="Team photo at the alexa prize summit" style="width: 100%;max-width:none;">
             <img class="hoverlarge" src="http://cafebritt.com/public/img/expierience/recipes-espresso.jpg" alt="Team photo at the alexa prize summit" style="left: -120px; top: 85px; border-radius: 0%;">
@@ -77,14 +144,24 @@
       </div>
     </div>
     <hr>
-    <div class="row" style="margin-bottom: 100px;">
-      <div class="col-sm-12">
+    <div class="row">
+      <div class="col-12">
         <em>Read our paper for more:</em>
           <br>
           Hannah Rashkin, Antoine Bosselut, Maarten Sap, Kevin Knight &amp; Yejin Choi (2018).<br>
           <strong>Modeling Naive Psychology of Characters in Simple Commonsense Stories</strong>. <em>ACL</em>
-          <a href="https://homes.cs.washington.edu/~msap/pdfs/rashkin2018modeling.pdf">[view pdf]</a>
+          <a href="https://homes.cs.washington.edu/~msap/pdfs/rashkin2018modeling.pdf" target="_blank">[view pdf]</a>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" style="margin: 30px 0;">
+      <div class="col-5" style="display: contents;">
+        <img class="footer-img" src="../../files/uwnlp-logo-640.png"/> 
+        <img class="footer-img" src="../../files/cse-logo.png"/> 
       </div>
     </div>
   </div>  
 </body>
+<script type="text/javascript">
+
+</script>
