@@ -21,11 +21,11 @@ var opts = {
   position: 'relative' // Element positioning
 };
 
-window.onload = function() {
-  $("#storyViz").show();
-  var target = document.getElementById('storyViz');
-  spinner = new Spinner(opts).spin(target);
-}
+// window.onload = function() {
+  // $("#storyViz").show();
+  // var target = document.getElementById('storyViz');
+  // spinner = new Spinner(opts).spin(target);
+// }
 
 d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds.php", function(error, data) {
   dataJson = data;
