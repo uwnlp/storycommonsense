@@ -152,6 +152,6 @@ h3,h4 {
 }
 .footer-img {
   max-height: 35px;
-  max-width: 300px;
+  /*max-width: 300px;*/
   margin: 0 20px;
 }
