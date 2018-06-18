@@ -27,7 +27,7 @@ window.onload = function() {
   spinner = new Spinner(opts).spin(target);
 }
 
-d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds.json", function(error, data) {
+d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds.php", function(error, data) {
   dataJson = data;
   addStoriesToSelect();
   spinner.stop();
