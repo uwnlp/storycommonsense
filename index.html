@@ -13,12 +13,15 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-  <script type="text/javascript" src="js/dataviz.js"></script>
-
   <!-- For story dropdown -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css">
 
+    <!-- For spinner -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.js"></script>
+  <link rel="stylesheet" href="https://spin.js.org/spin.css">
+  
+  <script type="text/javascript" src="js/dataviz.js"></script>
 </head>
 <body>
   <div class="container content-left">
@@ -90,13 +93,15 @@
               <option class="dev" value="a2ddbb50-e45b-4ad3-becf-b2d8475172bf" data-tokens="a2ddbb50-e45b-4ad3-becf-b2d8475172bf">Curry Disaster</option-->
             </select>
 
-            <div id="storyViz" style="display: none;">
-              <h4 id="title"></h4>
-              <div id="line1"></div>
-              <div id="line2"></div>
-              <div id="line3"></div>
-              <div id="line4"></div>
-              <div id="line5"></div>
+            <div id="storyViz" style="display: none;min-height: 80px;">
+              <div id="actualStory">
+                <h4 id="title"></h4>
+                <div id="line1"></div>
+                <div id="line2"></div>
+                <div id="line3"></div>
+                <div id="line4"></div>
+                <div id="line5"></div>
+              </div>
             </div>
             <!--div id="storyVizKey" style="margin-top: 10px;display: none;">
               <h5>Key</h5>
