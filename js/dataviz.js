@@ -30,7 +30,7 @@ var opts = {
 d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds.php", function(error, data) {
   dataJson = data;
   addStoriesToSelect();
-  spinner.stop();
+  // spinner.stop();
 });
 //https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/getStoryJson.php?storyid=013e6510-5cd4-4b4e-bd7e-491d3732602b
 
