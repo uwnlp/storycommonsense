@@ -143,6 +143,29 @@ h3,h4 {
 #img-div>img {
   
 }
+a.dev {
+  background-color: #dadaeb;
+}
+a.test {
+  background-color: #c6dbef;
+}
+
+a.dev::after {
+  content: " [dev]";
+  color: dimgrey;
+  font-size: 9pt;
+}
+a.train::after {
+  content: " [train]";
+  color: dimgrey;
+  font-size: 9pt;
+}
+a.test::after {
+  content: " [test]";
+  color: dimgrey;
+  font-size: 9pt;
+}
+
 #storyViz {
   margin-top: 10px;
   background-color: ghostwhite;
@@ -168,4 +191,12 @@ span.badge-pill{
 }
 p.story-line {
   margin-bottom: 10px;
+}
+span.annot::before {
+  content: "\A\2022\00a0";
+}
+span.annot {
+  margin-left: 5px;
+  padding-left: 5px;
+  display: block;
 }

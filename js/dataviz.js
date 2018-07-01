@@ -1,3 +1,4 @@
+google.charts.load('current', {packages: ['corechart']});
 var dataJson, story, spinner;
 
 var opts = {
@@ -129,38 +130,48 @@ function storyVizD3(story){
     })
     .html(function(d){
       d___ = d;
-      return "<h7><em>"+d.key+"</em>'s mental states</h7><br>";
+      return ;//"<h7><em>"+d.key+"</em>'s mental states</h7><br>";
+    });
+  // Motivation
+  annotations.append("div").text(function(d) {
+    d___ = d;
+    if (d3.entries(d.value.motiv).length > 0)
+      return d.key+"'s motivation";
+    else
+      return "";
+    }).selectAll("span")
+    .data(function(d){
+      return d3.values(d.value.motiv);
+    }).enter().append("span")
+    .filter(function(d) {
+      
+      return true;
+    })
+    .attr("class","annot")
+    .html(function(d){
+      d_____ = d;
+      out = d.text.join(", ");
+      if ("maslow" in d){
+        out += " (<code>"+d.maslow.join("</code>, <code>")+"</code>)";
+      }
+      return out;
     });
   // Emotions
-  annotations.append("div").text("Emotion").selectAll("span")
+  annotations.append("div").text(function(d) {
+      if (d3.entries(d.value.emotion).length > 0)
+        return d.key+"'s emotion";
+    }).selectAll("span")
     .data(function(d){
       return d3.values(d.value.emotion);
     }).enter().append("span")
+    .attr("class","annot")
     .html(function(d){
       d____ = d;
-      out = "";
-      out += "<br>free text: "+d.text.join(", ");
+      out = d.text.join(", ");
       if ("plutchik" in d){
-        out += "; ";  
-        out += "Plutchik: "+d.plutchik.join(", ");
+        out += " (<code>"+d.plutchik.join("</code>, <code>")+"</code>)";
       }
       return out;
     });
-  // Motivation
-  annotations.append("div").text("Motivation").selectAll("span")
-    .data(function(d){
-      console.log(d3.values(d.value.motiv));
-      return d3.values(d.value.motiv);
-    }).enter().append("span")
-    .html(function(d){
-      d_____ = d;
-      out = "";
-      out += "<br>free text: "+d.text.join(", ");
-      if ("maslow" in d){
-        out += "; ";  
-        out += "Maslow: "+d.maslow.join(", ");
-      }
-      return out;
-    });
-
+  
 }
