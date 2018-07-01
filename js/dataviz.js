@@ -102,13 +102,18 @@ function storyVizD3(story){
         arr[k].lineId=d.key;
       });
       return data;
-    }).enter()
-    .append("span")
-    .text(function (d) {
+    }).enter().append("span")
+    .html(function (d) {
       d__ = d;
-      return d.key;
+      if (d3.entries(d.value.emotion).length > 0 && d3.entries(d.value.motiv).length > 0)
+        return d.key;
+      else 
+        return "<em>"+d.key+"</em>";
     }).attr("class",function(d){
-      return d.value.app ? "badge badge-pill badge-primary": "badge badge-pill badge-secondary";
+      class_str = "btn btn-sm ";
+      class_str += d.value.app ? "btn-primary": "btn-secondary";
+      class_str += (d3.entries(d.value.emotion).length > 0 && d3.entries(d.value.motiv).length > 0) ? "": " disabled";
+      return class_str;
     }).attr("data-toggle","collapse")
     .attr("data-target",function(d,i){
       return "#"+d.key.replace(/\W/g, '')+"_"+d.lineId;
@@ -122,7 +127,9 @@ function storyVizD3(story){
         arr[k].lineId=d.key;
       });
       return data;
-    }).enter().append("div")
+    }).enter().append("div").filter(function(d){
+      return d3.entries(d.value.emotion).length > 0 && d3.entries(d.value.motiv).length > 0;
+    })
     .attr("class","collapse annotations")
     //.attr("class","annotations")
     .attr("id",function(d,i){
