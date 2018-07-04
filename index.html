@@ -21,7 +21,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.js"></script>
   <link rel="stylesheet" href="https://spin.js.org/spin.css">
   
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!--script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script-->
 
   <script type="text/javascript" src="js/dataviz.js"></script>
 </head>
@@ -83,10 +83,10 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="alert alert-secondary" role="alert">This website is still under construction, check back soon...</div>
+            <!--div class="alert alert-secondary" role="alert">This website is still under construction, check back soon...</div-->
             <h4>Browsing tool</h4>
             <p>
-              Select one of our stories to see all the annotations
+              Select one of our stories and click on individual characters to see our annotations. For dev/test stories, hover over categories to see descriptions.
             </p>
 
             <select id="storySelecter" onchange="loadStory(this.value)" class="selectpicker" data-live-search="true" style="width:70%;">
@@ -130,7 +130,10 @@
           <span class="btn btn-sm btn-primary disabled">char</span> appears in line.<br>
           <span class="btn btn-sm btn-secondary disabled">char</span> doesn't appears in line.<br><hr>
           <span class="btn btn-sm btn-primary">char</span> has a mental state change.<br>
-          <span class="btn btn-sm btn-primary disabled"><em>char</em></span> doesn't have a mental state change.
+          <span class="btn btn-sm btn-primary disabled"><em>char</em></span> doesn't have a mental state change.<hr>
+          <div id="categoryDescription">
+          
+          </div>
         </div>
         <!--figure>
           <div class="img-div">

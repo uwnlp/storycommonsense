@@ -1,4 +1,4 @@
-google.charts.load('current', {packages: ['corechart']});
+//google.charts.load('current', {packages: ['corechart']});
 var dataJson, story, spinner;
 
 var opts = {
@@ -28,21 +28,37 @@ var opts = {
   // spinner = new Spinner(opts).spin(target);
 // }
 
-d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds.php", function(error, data) {
-  dataJson = data;
-  addStoriesToSelect();
-  // spinner.stop();
-});
-//https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/getStoryJson.php?storyid=013e6510-5cd4-4b4e-bd7e-491d3732602b
+var defaultStoryId = "002fb75c-72a7-48e2-8d08-9d2f47fc1a29";
+var sampleIds;
 
-function addStoriesToSelect(){
+
+d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds_sample.php", function(error, data) {
+  console.log("Got sample IDs.");
+  dataJson = data;
+  sampleIds = d3.keys(dataJson);
+  addStoriesToSelect(false);
+  loadStory(defaultStoryId);
+  $("#storySelecter").prop("value",defaultStoryId).selectpicker("refresh");
+  
+  d3.json("https://homes.cs.washington.edu/~msap/debug/storycommonsense/data/viz/storyIds.php", function(error, data) {
+    console.log("Got all IDs.");
+    dataJson = data;
+    addStoriesToSelect(true);
+  });
+    
+    /*Load default story:*/
+    // loadStory("002fb75c-72a7-48e2-8d08-9d2f47fc1a29")
+  // 
+});
+
+
+function addStoriesToSelect(append){
   $.each(dataJson,function(k,v){
-    $("#storySelecter").append('<option class="'+v.partition+'" value="'+k+'" data-toggle="'+v.title+'">'+v.title+'</option>');
+    if (!append || $.inArray(k, sampleIds) == -1){
+      $("#storySelecter").append('<option class="'+v.partition+'" value="'+k+'" data-toggle="'+v.title+'">'+v.title+'</option>');
+    }
   });
   $("#storySelecter").selectpicker("refresh");
-
-  //Load default story:
-  loadStory("002fb75c-72a7-48e2-8d08-9d2f47fc1a29")
 }
 
 
@@ -159,7 +175,11 @@ function storyVizD3(story){
       d_____ = d;
       out = d.text.join(", ");
       if ("maslow" in d){
-        out += " (<code>"+d.maslow.join("</code>, <code>")+"</code>)";
+        out += " (Maslow: <code>"+d.maslow.join("</code>, <code>")+"</code>";
+        if ("reiss" in d && d.reiss.length > 0){
+          out += ";&nbsp;Reiss: <code>"+d.reiss.join("</code>, <code>");
+        }
+        out += "</code>)";
       }
       return out;
     });
@@ -176,9 +196,80 @@ function storyVizD3(story){
       d____ = d;
       out = d.text.join(", ");
       if ("plutchik" in d){
-        out += " (<code>"+d.plutchik.join("</code>, <code>")+"</code>)";
+        var emotions = d.plutchik.map(x => x.split(":")[0])
+        out += " (<code>"+emotions.join("</code>, <code>")+"</code>)";
       }
       return out;
     });
-  
+  reloadDescriptions();
 }
+var descriptions = {  
+  "motiv":{  
+    "spiritual growth": "Spiritual growth: "+["idealism", "indep", "curiosity", "serenity"].join(", "),
+    "esteem": "Esteem: "+["power", "honor", "competition", "status", "approval"].join(", "),
+    "love": "Love: "+["belonging", "family", "social", "romance"].join(", "),
+    "stability": "Stability: "+["health", "savings", "order", "safety"].join(", "),
+    "physiological": "Physiological: "+["food", "rest"].join(", "),
+ 
+    "idealism":"Idealism: pursuing moral ideals ",
+    "indep":"Independence: individuality, creativity ",
+    "curiosity":"Curiosity: wanting to learn new things ",
+    "serenity":"Serenity: wanting peace of mind ",
+
+    "power":"Power: ability to influence others or achieve goals",
+    "honor":"Honor: following socially-accepted values",
+    "competition":"Competition: wanting to win, to prove oneself",
+    "status":"Status: seek the respect or attention of others",
+    "approval":"Approval: wanting acceptance or validation",
+
+    "belonging":"Belonging: to be accepted into society and social groups ",
+    "family":"Family: sense of connection with family members ",
+    "contact":"Social contact: being or connecting with people ",
+    "romance":"Romance: romantic or sexual relationships ",
+    
+    "health":"Health: wanting to secure one's health or fitness ",
+    "savings":"Savings: wanting to secure property or other resources ",
+    "order":"Order: wanting a stable environment ",
+    "safety":"Safety: wanting to avoid danger ",
+    
+    "food":"Food: eating, drinking ",
+    "rest":"Rest: rest, sleep "
+  
+  },
+  "emotion":{  
+    "joy":"Joy: a feeling of great pleasure and happiness",
+    "trust":"Trust: firm belief in the reliability, truth, ability, or strength of someone or something",
+    "fear":"Fear: an unpleasant emotion caused by the belief that someone or something is dangerous, likely to cause pain, or a threat",
+    "surprise":"Surprise: (mild) astonishment or shock caused by something unexpected",
+    "sadness":"Sadness: emotional pain associated with, or characterized by, feelings of disadvantage, loss, despair, grief, helplessness, disappointment and sorrow",
+    "disgust":"Disgust: revulsion or profound disapproval aroused by something unpleasant or offensive",
+    "anger":"Anger: strong feeling of annoyance, displeasure, or hostility",
+    "anticipation":"Anticipation: an emotion involving pleasure, excitement, or anxiety in considering an expected event"
+  }
+}
+var event;
+function formatDescription(descStr){
+  var desc = descStr.split(":");
+  return "<em>"+desc[0]+"</em>: "+desc[1]
+}
+function reloadDescriptions(){
+  for (e in descriptions.emotion){
+    $("code:contains("+e+")").prop("title",descriptions.emotion[e]).hover(function(ev){
+      $("#categoryDescription").html(formatDescription(descriptions.emotion[ev.target.textContent]));
+    },function(ev){$("#categoryDescription").text("")});
+  }
+  for (cat in descriptions.motiv){
+    $("code:contains("+cat+")").prop("title",descriptions.motiv[cat]).hover(
+      function(ev){
+        $("#categoryDescription").html(formatDescription(descriptions.motiv[ev.target.textContent]));
+      },
+      function(ev){
+        $("#categoryDescription").html("")
+      });
+  
+  }
+}
+
+
+
+

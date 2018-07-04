@@ -173,6 +173,9 @@ a.test::after {
   border-radius: 4px;
   border: 1px solid #e6e6ff;
 }
+#storyVizKey{
+  font-size: 10pt;
+}
 .footer-img {
   max-height: 35px;
   /*max-width: 300px;*/
@@ -196,6 +199,7 @@ span.btn{
 p.story-line {
   margin-bottom: 10px;
 }
+
 span.annot::before {
   content: "\A\2022\00a0";
 }
